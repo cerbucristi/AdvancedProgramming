@@ -13,17 +13,17 @@ public class Main {
 
         int result = sumOfDigits(n);
 
-        while (result > 9){
+        while (result > 9) {
             result = sumOfDigits(result);
         }
 
         System.out.println("Willy-nilly, this semester I will learn " + languages[result]);
     }
 
-    private static int sumOfDigits(int n){
+    private static int sumOfDigits(int n) {
         int sum = 0;
 
-        while (n > 0){
+        while (n > 0) {
             sum = sum + n % 10;
             n = n / 10;
         }

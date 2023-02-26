@@ -1,3 +1,7 @@
+/**
+ * @author cerbu cristi
+ */
+
 public class LatinSquare {
 
     private int n;

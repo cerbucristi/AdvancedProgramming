@@ -1,8 +1,11 @@
+package primaryclasses;
+
 import enums.LocationTypes;
+
+import java.util.Objects;
 
 public class Location {
     private String strLocationName;
-
     private LocationTypes locationType;
     private double xCoordinate;
     private double yCoordinate;
@@ -16,12 +19,28 @@ public class Location {
 
     @Override
     public String toString() {
-        return "Location{" + "\n" +
+        return "primaryclasses.Location{" + "\n" +
                 "strLocationName='" + strLocationName + '\'' + "\n" +
                 ", locationType=" + locationType + "\n" +
                 ", xCoordinate=" + xCoordinate + "\n" +
                 ", yCoordinate=" + yCoordinate + "\n" +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return Double.compare(location.xCoordinate, xCoordinate) == 0
+                && Double.compare(location.yCoordinate, yCoordinate) == 0
+                && strLocationName.equals(location.strLocationName)
+                && locationType == location.locationType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(strLocationName, locationType, xCoordinate, yCoordinate);
     }
 
     public LocationTypes getLocationType() {

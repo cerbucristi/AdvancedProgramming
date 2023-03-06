@@ -33,9 +33,20 @@ public class Road {
         this.speedLimit = speedLimit;
     }
 
-    protected double getLocationEuclideanDistance(List<Location> locations) {
-        return Math.sqrt(Math.pow((locations.get(0).getxCoordinate() - locations.get(1).getxCoordinate()), 2) +
-                Math.pow((locations.get(0).getyCoordinate() - locations.get(1).getyCoordinate()), 2));
+    public Road() {
+    }
+
+    public double getLocationEuclideanDistance(List<Location> locations) {
+        double distance = 0;
+        int i = 0;
+        while ( i <= locations.size()-2 ){
+
+            distance += Math.sqrt(Math.pow((locations.get(i).getxCoordinate() - locations.get(i+1).getxCoordinate()), 2) +
+                    Math.pow((locations.get(i).getyCoordinate() - locations.get(i+1).getyCoordinate()), 2));
+
+            i++;
+        }
+        return distance;
     }
 
     @Override

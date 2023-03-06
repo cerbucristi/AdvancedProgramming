@@ -1,18 +1,14 @@
 import enums.LocationTypes;
 import enums.RoadTypes;
 import locations.City;
-import primaryclasses.Location;
-import primaryclasses.Problem;
-import primaryclasses.Road;
+import primaryclasses.*;
 import roads.Highway;
+import roads.Metropolitan;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Main {
 
@@ -47,6 +43,17 @@ public class Main {
         locations2.add(location3);
 
         Road road3 = new Highway("HIGHWAY2", locations2, 59.0, 130, (short) 50);
+
+        /////////
+        Location location4 = new City("Timisoara", -40, -40, 5000);
+        List<Location> locations3 = new LinkedList<>();
+        locations3.add(location3);
+        locations3.add(location4);
+
+        Road road4 = new Metropolitan("Road1", locations3, 37.0, 50, (short) 10);
+
+        ///////////
+
         Problem problem = new Problem();
         problem.addLocations(locations);
         problem.addRoads(Collections.singletonList(road1));
@@ -58,12 +65,23 @@ public class Main {
         problem.addLocations(Collections.singletonList(location1));
         problem.addLocations(Collections.singletonList(location3));
         problem.addRoads(Collections.singletonList(road3));
+        problem.addLocations(Collections.singletonList(location4));
+        problem.addRoads(Collections.singletonList(road4));
 //        System.out.println(problem.getLocations());
         problem.setStartLocation(location1);
-        problem.setEndLocation(location3);
+        problem.setEndLocation(location4);
         if (problem.isValidProblem()) {
             System.out.println(problem.findMyWay());
         }
+
+        //Bonus Lab Part
+
+        System.out.println("\n Bonus lab part \n");
+
+        Algorithm alg = new DijkstraAlgorithm(problem);
+        Solution sol = alg.solve();
+        System.out.println(sol.getRoute().stream().map(Location::getStrLocationName).collect(Collectors.toList()));
+        System.out.println(sol.computeLength());
 
 
     }

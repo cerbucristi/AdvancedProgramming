@@ -36,13 +36,17 @@ public class Road {
     public Road() {
     }
 
+    /*
+    Returns the euclidean distance as a double value for a list of locations calculated by the formula: Ed = sqrt((p1-q1)^2 + (p2-q2)^2)
+    where we consider that each location has cartesian coordinates L(x,y)
+     */
     public double getLocationEuclideanDistance(List<Location> locations) {
         double distance = 0;
         int i = 0;
-        while ( i <= locations.size()-2 ){
+        while (i <= locations.size() - 2) {
 
-            distance += Math.sqrt(Math.pow((locations.get(i).getxCoordinate() - locations.get(i+1).getxCoordinate()), 2) +
-                    Math.pow((locations.get(i).getyCoordinate() - locations.get(i+1).getyCoordinate()), 2));
+            distance += Math.sqrt(Math.pow((locations.get(i).getxCoordinate() - locations.get(i + 1).getxCoordinate()), 2) +
+                    Math.pow((locations.get(i).getyCoordinate() - locations.get(i + 1).getyCoordinate()), 2));
 
             i++;
         }

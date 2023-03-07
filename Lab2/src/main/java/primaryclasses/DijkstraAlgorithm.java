@@ -2,7 +2,7 @@ package primaryclasses;
 
 import java.util.*;
 
-public class DijkstraAlgorithm extends  Algorithm{
+public class DijkstraAlgorithm extends Algorithm {
 
 
     public DijkstraAlgorithm(Problem problem) {
@@ -15,7 +15,13 @@ public class DijkstraAlgorithm extends  Algorithm{
     }
 
 
-
+    /**
+     * Finds the shortest road path from start point to end point using the Dijkstra algorithm technique
+     * Main logic is based on a priority queue with a comparator by road length
+     * @param start is the start point in finding the shortest path road
+     * @param end is the end point in finding the shortest path road
+     * @return the list of merged locations that describe the shortest path road from start to end (by road length)
+     */
     private List<Location> dijkstra(Location start, Location end) {
         Map<Location, Double> distances = new HashMap<>();
         Map<Location, Road> previousRoads = new HashMap<>();
@@ -56,15 +62,14 @@ public class DijkstraAlgorithm extends  Algorithm{
         return adjacentRoads;
     }
 
-    private List<Location> buildShortestPath(Map<Location, Road> previousRoads,Location start, Location end) {
-        List<Location> path = new ArrayList<>();
+    private List<Location> buildShortestPath(Map<Location, Road> previousRoads, Location start, Location end) {
+        List<Location> mergedLocations = new ArrayList<>();
         Road currentRoad = previousRoads.get(end);
         while (currentRoad != null) {
-            path.add(0, currentRoad.getAvailableLocations().get(1));
+            mergedLocations.add(0, currentRoad.getAvailableLocations().get(1));
             currentRoad = previousRoads.get(currentRoad.getAvailableLocations().get(0));
         }
-        path.add(0, start);
-        return path;
+        mergedLocations.add(0, start);
+        return mergedLocations;
     }
-
 }

@@ -10,7 +10,7 @@ public class Solution {
         this.route = route;
     }
 
-    public double computeLength(){
+    public double computeLength() {
         Road road = new Road();
         return road.getLocationEuclideanDistance(route);
     }

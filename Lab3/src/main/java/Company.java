@@ -1,9 +1,19 @@
-public class Company implements Node, Comparable<Company> {
+import java.util.HashMap;
+import java.util.Map;
+
+public class Company implements Node {
 
     private String strCompanyName;
 
+    private Map<Node, RelationEnum> relationMap = new HashMap<>();
+
+
     public Company(String strCompanyName) {
         this.strCompanyName = strCompanyName;
+    }
+    @Override
+    public void addRelationship(Node node, RelationEnum relation) {
+        relationMap.put(node, relation);
     }
 
     @Override
@@ -12,8 +22,8 @@ public class Company implements Node, Comparable<Company> {
     }
 
     @Override
-    public int compareTo(Company anotherCompany) {
-        return this.strCompanyName.compareTo(anotherCompany.strCompanyName);
+    public int getNodeImportance() {
+        return relationMap.size();
     }
 
     @Override
@@ -29,5 +39,13 @@ public class Company implements Node, Comparable<Company> {
 
     public void setStrCompanyName(String strCompanyName) {
         this.strCompanyName = strCompanyName;
+    }
+
+    public Map<Node, RelationEnum> getRelationMap() {
+        return relationMap;
+    }
+
+    public void setRelationMap(Map<Node, RelationEnum> relationMap) {
+        this.relationMap = relationMap;
     }
 }

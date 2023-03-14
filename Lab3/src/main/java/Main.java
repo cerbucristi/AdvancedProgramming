@@ -70,6 +70,12 @@ public class Main {
         //nodurile ordonate dupa importanta
         System.out.println(network);
 
+        //printed network (priority established by name)
         System.out.println(network.getNodes().stream().sorted().collect(Collectors.toList()));
+
+        //printed network (priority established by priority)
+        network.sortNetworkByImportance();
+        System.out.println(network);
+
     }
 }

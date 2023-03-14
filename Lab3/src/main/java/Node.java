@@ -10,6 +10,6 @@ public interface Node extends  Comparable<Node> {
 
     @Override
     default int compareTo(Node o) {
-        return Integer.compare(this.getNodeImportance(), o.getNodeImportance());
+        return this.getName().compareTo(o.getName());
     }
 }

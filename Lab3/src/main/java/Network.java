@@ -20,14 +20,12 @@ public class Network {
         nodes.add(node);
     }
 
+    private int compareByValue(Node o1, Node o2){
+        return Integer.compare(o1.getNodeImportance(), o2.getNodeImportance());
+    }
 
     public void sortNetworkByImportance(){
-        nodes.sort(new Comparator<Node>() {
-            @Override
-            public int compare(Node o1, Node o2) {
-                return Integer.compare(o1.getNodeImportance(), o2.getNodeImportance());
-            }
-        });
+        nodes.sort(this::compareByValue);
     }
 
     @Override

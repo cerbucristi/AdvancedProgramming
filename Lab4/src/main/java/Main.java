@@ -33,6 +33,7 @@ public class Main {
         students.get(2).setProjectPreferences(Collections.singletonList(projects.get(2)));
 
         Problem problem1 = new Problem(students);
+        //using stream api in order to filter students with proj pref lower than average
         List<Student> preferenceNumberLower = problem1.getStudents().stream().filter(student -> student.getProjectPreferences().size() < problem1.getAverageNumberOfProjects()).collect(Collectors.toList());
         System.out.println(preferenceNumberLower);
 

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Student implements Comparable<Student>{
+public class Student implements Node, Comparable<Student>{
     private String studentName;
     private List<Project> projectPreferences;
 
@@ -18,6 +18,11 @@ public class Student implements Comparable<Student>{
 
     public void addProject (Project project) {
         projectPreferences.add(project);
+    }
+
+    @Override
+    public String getName() {
+        return studentName;
     }
 
     @Override
@@ -52,4 +57,5 @@ public class Student implements Comparable<Student>{
     public void setProjectPreferences(List<Project> projectPreferences) {
         this.projectPreferences = projectPreferences;
     }
+
 }

@@ -1,4 +1,6 @@
 import com.github.javafaker.Faker;
+import org.graph4j.alg.matching.HopcroftKarpMaximumMatching;
+import org.jgrapht.alg.matching.HopcroftKarpMaximumCardinalityBipartiteMatching;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -7,6 +9,7 @@ import java.util.stream.IntStream;
 public class Main {
     public static void main(String[] args) {
 
+        //MANDATORY LAB PART
         List<Project> projects = IntStream.rangeClosed(0, 2)
                 .mapToObj(i -> new Project("P" + i) )
                 .collect(Collectors.toList());
@@ -24,6 +27,7 @@ public class Main {
         System.out.println(projectSet);
 
 
+        //HOMEWORK LAB PART
         students.get(0).setProjectPreferences(projects);
         students.get(1).setProjectPreferences(Arrays.asList(projects.get(0), projects.get(1)));
         students.get(2).setProjectPreferences(Collections.singletonList(projects.get(2)));

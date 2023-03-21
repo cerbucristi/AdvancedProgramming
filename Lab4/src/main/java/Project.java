@@ -1,8 +1,13 @@
-public class Project implements Comparable<Project>{
+public class Project implements Node, Comparable<Project>{
     private String projectName;
 
     public Project(String projectName) {
         this.projectName = projectName;
+    }
+
+    @Override
+    public String getName() {
+        return projectName;
     }
 
     @Override
@@ -24,4 +29,5 @@ public class Project implements Comparable<Project>{
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
+
 }

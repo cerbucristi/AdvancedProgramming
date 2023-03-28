@@ -8,4 +8,5 @@ Documents:
     <#list doc.tags?keys as tag>
         ${tag}: ${doc.tags[tag]}
     </#list>
+${'\n'}
 </#list>

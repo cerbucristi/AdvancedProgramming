@@ -1,5 +1,9 @@
+package utils;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import exceptions.InvalidCatalogException;
+import filemanagement.Catalog;
+import filemanagement.Document;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +27,7 @@ public class CatalogUtil {
                     new File(path),
                     Catalog.class);
         } catch (IOException e) {
-            throw new InvalidCatalogException(e);
+            throw new InvalidCatalogException("Invalid catalog file" + e);
         }
     }
 

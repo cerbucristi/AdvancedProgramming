@@ -1,4 +1,7 @@
 import exceptions.InvalidCatalogException;
+import filemanagement.Catalog;
+import filemanagement.Document;
+import utils.CatalogUtil;
 
 import java.io.IOException;
 

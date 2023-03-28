@@ -1,9 +1,10 @@
+package filemanagement;
 
-import javax.print.Doc;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Catalog {
+public class Catalog implements Serializable {
 
     private String catalogName;
     private List<Document> documentList;
@@ -24,7 +25,7 @@ public class Catalog {
 
     @Override
     public String toString() {
-        return "Catalog{" +
+        return "filemanagement.Catalog{" +
                 "catalogName='" + catalogName + '\'' +
                 ", documentList=" + documentList +
                 '}';

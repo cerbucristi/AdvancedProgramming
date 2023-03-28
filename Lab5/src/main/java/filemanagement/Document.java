@@ -1,7 +1,10 @@
+package filemanagement;
+
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Document {
+public class Document implements Serializable {
     private String id;
     private String title;
     private String location; //file name or Web page
@@ -21,7 +24,7 @@ public class Document {
 
     @Override
     public String toString() {
-        return "Document{" +
+        return "filemanagement.Document{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", location='" + location + '\'' +

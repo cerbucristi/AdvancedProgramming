@@ -1,3 +1,7 @@
+package graphic;
+
+import gamemodel.Game;
+
 import javax.swing.*;
 
 import java.awt.*;
@@ -30,9 +34,6 @@ public class MainFrame extends JFrame {
         pack();
     }
 
-    public static void main(String[] args) {
-        new MainFrame().setVisible(true);
-    }
 
 
 }

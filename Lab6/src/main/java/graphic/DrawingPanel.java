@@ -1,6 +1,14 @@
+package graphic;
+
+import gamemodel.Game;
+import gamemodel.Line;
+import gamemodel.Vertice;
+import org.javatuples.Pair;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.*;
 
@@ -14,24 +22,27 @@ public class DrawingPanel extends JPanel {
     BufferedImage image; //the offscreen image
     Graphics2D graphics; //the tools needed to draw in the image
 
+    Game game;
+
     public DrawingPanel(MainFrame mainFrame) {
         this.frame = mainFrame;
         createOffscreenImage();
         initPanel();
+        game = new Game();
         createBoard();
     }
 
     private void initPanel() {
         setPreferredSize(new Dimension(W, H));
         setBorder(BorderFactory.createEtchedBorder());
-//        this.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mousePressed(MouseEvent e) {
-//
-//                //TODO...
-//                repaint();
-//            }
-//        });
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+                game.checkAndColorLine(DrawingPanel.this, new Vertice(e.getX(), e.getY()));
+                repaint();
+            }
+        });
     }
 
     private void createOffscreenImage() {
@@ -63,11 +74,13 @@ public class DrawingPanel extends JPanel {
         for (int i = 0; i < numVertices; i++) {
             x[i] = x0 + (int) (radius * Math.cos(alpha * i));
             y[i] = y0 + (int) (radius * Math.sin(alpha * i));
+            game.getVertices().put(new Pair<>(x[i], y[i]), new Vertice(x[i], y[i]));
         }
     }
 
     private void drawLines() {
 
+        Map<Pair<Integer, Integer>, Vertice> verticeMap = game.getVertices();
         Random random = new Random();
         double p;
         for (int i = 0; i < x.length; i++) {
@@ -76,11 +89,24 @@ public class DrawingPanel extends JPanel {
                 if (p <= edgeProbability) {
                     graphics.setColor(Color.BLACK);
                     graphics.drawLine(x[i], y[i], x[j], y[j]);
+                    game.getLines().add(new Line(verticeMap.get(new Pair<>(x[i], y[i])),
+                            verticeMap.get(new Pair<>(x[j], y[j]))));
                 }
             }
         }
 
 
+    }
+
+    public void drawLineWithColor (Line line, Color color) {
+        graphics.setColor(color);
+        graphics.drawLine(line.getVertice1().getX(), line.getVertice1().getY(),
+                line.getVertice2().getX(), line.getVertice2().getY());
+        repaint();
+    }
+
+    public void finishGame () {
+        graphics.drawString("Game Finished", 40, 50);
     }
 
     private void drawVertices() {

@@ -1,6 +1,7 @@
+package graphic;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.text.DecimalFormat;
 
 public class ConfigPanel extends JPanel {
 

@@ -1,8 +1,14 @@
+package graphic;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.*;
 
-public class ControlPanel extends JPanel {
+public class ControlPanel extends JPanel implements Serializable{
 
     final MainFrame frame;
     JButton exitBtn = new JButton("Exit");
@@ -25,11 +31,27 @@ public class ControlPanel extends JPanel {
         add(exitBtn);
 
         exitBtn.addActionListener(this::exitGame);
+        savetBtn.addActionListener(this::saveGame);
+        loadtBtn.addActionListener(this::loadGame);
     }
 
     private void exitGame(ActionEvent e) {
         frame.dispose();
     }
 
-    //TODO: implemet the other methods
+    private void saveGame(ActionEvent e) {
+
+        RenderedImage rendImage = frame.canvas.image;
+        File file = new File("game.png");
+        try {
+            ImageIO.write(rendImage, "png", file);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    private void loadGame(ActionEvent e) {
+
+        
+    }
 }

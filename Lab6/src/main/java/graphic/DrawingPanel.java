@@ -100,6 +100,7 @@ public class DrawingPanel extends JPanel {
 
     public void drawLineWithColor (Line line, Color color) {
         graphics.setColor(color);
+        graphics.setStroke(new BasicStroke(4f));
         graphics.drawLine(line.getVertice1().getX(), line.getVertice1().getY(),
                 line.getVertice2().getX(), line.getVertice2().getY());
         repaint();

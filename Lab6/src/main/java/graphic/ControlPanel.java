@@ -52,6 +52,17 @@ public class ControlPanel extends JPanel implements Serializable{
 
     private void loadGame(ActionEvent e) {
 
-        
+        try {
+            BufferedImage image = ImageIO.read(new File("game.png"));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(image, "png", baos);
+            InputStream is = new ByteArrayInputStream(baos.toByteArray());
+            BufferedImage image1 = ImageIO.read(is);
+            is.close();
+            frame.canvas.graphics = image1.createGraphics();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        repaint();
     }
 }

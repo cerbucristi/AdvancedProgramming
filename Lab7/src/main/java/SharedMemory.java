@@ -1,19 +1,16 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class SharedMemory {
 
-    private List<Token> tokensList;
+    private Queue<Token> tokensList;
 
 
     public SharedMemory(int numberOfTokens) {
-        this.tokensList = new ArrayList<>();
+        this.tokensList = new LinkedList<>();
         for (int i = 0; i <= numberOfTokens; i++) {
-            tokensList.add(new Token(i));
+            tokensList.offer(new Token(i));
         }
-        Collections.shuffle(tokensList);
+        Collections.shuffle((List<?>) tokensList);
     }
 
     public synchronized List<Token> extractTokens(int howMany) {
@@ -23,17 +20,17 @@ public class SharedMemory {
             if (tokensList.isEmpty()) {
                 break;
             }
-            extracted.add(tokensList.get(random.nextInt(tokensList.size())));
+            extracted.add(tokensList.poll());
         }
         return extracted;
     }
 
 
-    public List<Token> getTokensList() {
+    public Queue<Token> getTokensList() {
         return tokensList;
     }
 
-    public void setTokensList(List<Token> tokensList) {
+    public void setTokensList(Queue<Token> tokensList) {
         this.tokensList = tokensList;
     }
 }

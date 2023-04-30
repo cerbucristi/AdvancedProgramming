@@ -1,27 +1,32 @@
 package DAOClasses;
 
 import Data.Database;
+import org.postgresql.jdbc.PgArray;
 
 import java.sql.*;
 
-public class ArtistDAO {
+public class AlbumDAO {
 
-    public void create(String name) throws SQLException {
+    public void create(int year, String title, String artist, String... genres ) throws SQLException {
         Connection con = Database.getConnection();
         try (PreparedStatement pstmt = con.prepareStatement(
-                "insert into artists (name) values (?)")) {
-            pstmt.setString(1, name);
+                "insert into albums (release_year, title, artist, genres) values (?,?,?,?)")) {
+            pstmt.setInt(1, year);
+            pstmt.setString(2,title);
+            pstmt.setString(3,artist);
+            pstmt.setArray(4, con.createArrayOf("VARCHAR", genres));
+
             pstmt.executeUpdate();
         }
     }
 
-    public Integer findByName(String name) throws SQLException {
+    public Integer findByTitle(String title) throws SQLException {
         Integer id = null;
         Connection con = Database.getConnection();
 
         try (PreparedStatement pstmt = con.prepareStatement(
-                     "SELECT id FROM artists WHERE name = ?")) {
-            pstmt.setString(1, name);
+                "SELECT id FROM albums WHERE name = ?")) {
+            pstmt.setString(1, title);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     id = rs.getInt("id");
@@ -36,7 +41,7 @@ public class ArtistDAO {
         Connection con = Database.getConnection();
 
         try (PreparedStatement pstmt = con.prepareStatement(
-                     "SELECT name FROM artists WHERE id = ?")) {
+                "SELECT name FROM albums WHERE id = ?")) {
             pstmt.setInt(1, id);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {

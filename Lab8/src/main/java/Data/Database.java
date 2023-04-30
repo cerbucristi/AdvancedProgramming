@@ -25,7 +25,7 @@ public class Database {
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            connection.setAutoCommit(true);
+            connection.setAutoCommit(false);
         } catch (SQLException e) {
             System.err.println(e);
         } catch (ClassNotFoundException e) {

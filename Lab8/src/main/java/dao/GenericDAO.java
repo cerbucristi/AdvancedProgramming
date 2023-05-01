@@ -1,6 +1,6 @@
 package dao;
 
-import data.Database;
+import data.DatabaseHikari;
 import enums.ModelToTable;
 import models.AbstractDataModel;
 
@@ -15,7 +15,7 @@ public abstract class GenericDAO<T extends AbstractDataModel> {
 
     public List<T> findAll(Class<T> tClass) throws SQLException {
         T model = null;
-        Connection con = Database.getConnection();
+        Connection con = DatabaseHikari.getConnection();
         List<T> objects = new ArrayList<>();
         try (PreparedStatement stmt = con.prepareStatement("SELECT * FROM "
                 + ModelToTable.valueOf(tClass.getSimpleName().toLowerCase()).getTableName())) {
@@ -35,7 +35,7 @@ public abstract class GenericDAO<T extends AbstractDataModel> {
 
     public List<T> findByName(Class<T> tClass, String name) throws SQLException {
         T model = null;
-        Connection con = Database.getConnection();
+        Connection con = DatabaseHikari.getConnection();
 
         List<T> objects = new ArrayList<>();
         try (PreparedStatement pstmt = con.prepareStatement(
@@ -57,7 +57,7 @@ public abstract class GenericDAO<T extends AbstractDataModel> {
 
     public T findById(Class<T> tClass, int id) throws SQLException {
         T model = null;
-        Connection con = Database.getConnection();
+        Connection con = DatabaseHikari.getConnection();
         try (PreparedStatement pstmt = con.prepareStatement(
                 "SELECT id FROM " + ModelToTable.valueOf(tClass.getSimpleName().toLowerCase()).getTableName() +" WHERE id = ?")) {
             pstmt.setInt(1, id);

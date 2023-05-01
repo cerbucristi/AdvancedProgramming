@@ -2,6 +2,7 @@ import dao.AlbumDAO;
 import dao.ArtistDAO;
 import dao.GenreDAO;
 import data.Database;
+import data.DatabaseHikari;
 import models.Album;
 import models.Artist;
 
@@ -24,12 +25,10 @@ public class Main {
             Album album1 = new Album(2000, "Thriller", "Bon Jovi", Arrays.asList("Funk","Soul","Pop"));
             albums.create(album1);
 
-            Database.getConnection().commit();
             System.out.println(albums.findAll(Album.class).toString());
-            Database.getConnection().close();
+            DatabaseHikari.getConnection().close();
         } catch (SQLException e) {
-            System.err.println(e);
-            Database.rollback();
+            throw new RuntimeException(e);
         }
     }
 }

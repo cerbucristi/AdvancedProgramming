@@ -1,6 +1,6 @@
 package dao;
 
-import data.Database;
+import data.DatabaseHikari;
 import models.Album;
 
 import java.sql.*;
@@ -9,7 +9,7 @@ import java.sql.*;
 public class AlbumDAO extends GenericDAO<Album>{
     @Override
     public void create(Album entity) throws SQLException {
-        Connection con = Database.getConnection();
+        Connection con = DatabaseHikari.getConnection();
         try (PreparedStatement pstmt = con.prepareStatement(
                 "insert into albums (release_year, title, artist, genres) values (?,?,?,?)")) {
             pstmt.setInt(1, entity.getReleaseYear());

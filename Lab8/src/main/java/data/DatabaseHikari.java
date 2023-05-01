@@ -14,7 +14,8 @@ public class DatabaseHikari {
         config.setJdbcUrl("jdbc:postgresql://localhost:5432/postgres");
         config.setUsername("postgres");
         config.setPassword("qwerty123");
-        config.setMaximumPoolSize(10);
+        config.setMaximumPoolSize(1000);
+        config.setConnectionTimeout(1000000);
 
         dataSource = new HikariDataSource(config);
     }

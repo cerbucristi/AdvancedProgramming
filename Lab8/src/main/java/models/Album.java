@@ -32,10 +32,7 @@ public class Album extends AbstractDataModel{
         }
         Set<String> thisGenres = new HashSet<>(this.genreNames);
         Set<String> otherGenres = new HashSet<>(other.genreNames);
-        if (!Collections.disjoint(thisGenres, otherGenres)) {
-            return true;
-        }
-        return false;
+        return Collections.disjoint(thisGenres, otherGenres);
     }
 
     @Override

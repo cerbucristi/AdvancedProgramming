@@ -33,7 +33,7 @@ public class Algorithm {
         // Find maximal stable sets (playlists) in the graph
         List<Playlist> playlists = new ArrayList<>();
         Set<Album> remainingVertices = new HashSet<>(albums);
-        while (!remainingVertices.isEmpty() && (limit <= 0 || playlists.size() < limit)) {
+        while (!remainingVertices.isEmpty()) {
             Set<Album> playlistVertices = findMaximalStableSet(graph, remainingVertices);
             if (playlistVertices.isEmpty()) {
                 break;

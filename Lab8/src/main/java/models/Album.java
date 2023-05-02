@@ -2,8 +2,7 @@ package models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Album extends AbstractDataModel{
@@ -21,6 +20,22 @@ public class Album extends AbstractDataModel{
         this.title = title;
         this.artist = artist;
         this.genreNames = genreNames;
+    }
+
+    //TODO: maybe add this functionality to the entire abstract model?
+    public boolean isRelated(Album other) {
+        if (this.artist.equals(other.artist)) {
+            return true;
+        }
+        if (this.releaseYear == other.releaseYear) {
+            return true;
+        }
+        Set<String> thisGenres = new HashSet<>(this.genreNames);
+        Set<String> otherGenres = new HashSet<>(other.genreNames);
+        if (!Collections.disjoint(thisGenres, otherGenres)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
